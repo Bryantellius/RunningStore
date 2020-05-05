@@ -10,7 +10,7 @@ export default {
   mysql: {
     host: process.env.HOST,
     user: process.env.USER,
-    pass: process.env.PASS,
+    password: process.env.PASS,
     database: process.env.SCHEMA,
   },
   port: process.env.PORT,
