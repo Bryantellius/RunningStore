@@ -8,6 +8,8 @@ import * as morgan from "morgan";
 import * as cors from "cors";
 import router from "./routes";
 import { IError } from "./utils/types";
+import "./middleware/bearerstrategy";
+import "./middleware/localstrategy";
 
 const app = express();
 
