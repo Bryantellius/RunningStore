@@ -5,8 +5,8 @@ import shoes from "../queries/shoes";
 import users from "../queries/users";
 import tokens from "../queries/tokens";
 
-import { IShoe } from "../queries/shoes";
-import { IUser } from "../queries/users";
+import { IShoe } from "../../utils/types";
+import { IUser } from "../../utils/types";
 
 export const Connection = mysql.createConnection(config.mysql);
 

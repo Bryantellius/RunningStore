@@ -1,31 +1,25 @@
 import { Query } from "../model";
+import { IShoe } from "../../utils/types";
 
-export const getOne = (id: number) => {
+export const getOne = async (id: number) => {
   Query(`SELECT * FROM shoes WHERE id = ?`, [id]);
 };
 
-export const getAll = () => {
+export const getAll = async () => {
   Query(`SELECT * FROM shoes`);
 };
 
-export const insert = (body: IShoe) => {
+export const insert = async (body: IShoe) => {
   Query(`INSERT INTO shoes SET ?`, [body]);
 };
 
-export const update = (id: number, body: IShoe) => {
+export const update = async (id: number, body: IShoe) => {
   Query(`UPDATE shoes SET ? WHERE id = ?`, [body, id]);
 };
 
-export const destroy = (id: number) => {
+export const destroy = async (id: number) => {
   Query(`DELETE FROM shoes WHERE id = ?`, [id]);
 };
-
-export interface IShoe {
-  brand_id: number;
-  model_name: string;
-  price: number;
-  gender: string;
-}
 
 export default {
   getOne,
