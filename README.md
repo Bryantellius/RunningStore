@@ -1,7 +1,7 @@
-# Barebones React/TypeScript/Express/Sass Boilerplate
-This project is a starting point for a TypeScript based React app that also has a local API server using express.
+# Prototype Design for Brad and his Running Store Venture
 
-There are 2 different Webpack configurations. One for the server and one for the client.
+- This app is started from a basic react/typescript/express/sass boilerplate.
+- There are 2 different Webpack configurations. One for the server and one for the client.
 
 ## Server
 The server build process compiles the TypeScript files found in `/src/server` into a single bundled JavaScript file located in the `/dist` directory.
