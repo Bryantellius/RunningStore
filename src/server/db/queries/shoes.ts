@@ -2,11 +2,16 @@ import { Query, Connection } from "../model";
 import { IShoe } from "../../utils/types";
 
 export const getOne = async (id: number) => {
-  return Query(`SELECT * FROM shoes WHERE id = ?`, [id]);
+  return Query(
+    `SELECT s.id, b.brand_name, s.model_name, s.price, s.gender FROM shoes s JOIN brands b ON b.id = s.brand_id WHERE s.id = ?`,
+    [id]
+  );
 };
 
 export const getAll = async () => {
-  return Query(`SELECT * FROM shoes`);
+  return Query(
+    `SELECT s.id, b.brand_name, s.model_name, s.price, s.gender FROM shoes s JOIN brands b ON b.id = s.brand_id`
+  );
 };
 
 export const insert = async (body: IShoe) => {
