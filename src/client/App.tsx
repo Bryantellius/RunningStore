@@ -4,11 +4,12 @@ import Home from "./views/Home";
 import Shop from "./views/Shop";
 import Contact from "./views/Contact";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 class App extends React.Component<IAppProps> {
   render() {
     return (
-      <main className="container-fluid">
+      <main id="appMain" className="container-fluid">
         <BrowserRouter>
           <NavBar />
           <Switch>
@@ -22,6 +23,7 @@ class App extends React.Component<IAppProps> {
               <Contact />
             </Route>
           </Switch>
+          <Footer />
         </BrowserRouter>
       </main>
     );
