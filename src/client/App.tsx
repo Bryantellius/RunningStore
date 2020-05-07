@@ -15,21 +15,11 @@ class App extends React.Component<IAppProps> {
         <BrowserRouter>
           <NavBar />
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/shop">
-              <Shop />
-            </Route>
-            <Route path="/contact">
-              <Contact />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/admin">
-              <AdminOptions />
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route path="/shop" component={Shop} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/login" component={Login} />
+            <Route path="/admin" component={AdminOptions} />
           </Switch>
           <Footer />
         </BrowserRouter>

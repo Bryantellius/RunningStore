@@ -1,5 +1,4 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { apiService, setToken, User } from "../utils/apiService";
@@ -14,7 +13,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     this.login = this.login.bind(this);
   }
 
-  login = async (e: React.MouseEvent<HTMLFormElement>) => {
+  login = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log(this.state);
     try {
@@ -24,6 +23,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
         this.props.history.push("/admin");
       } else {
         alert("Incorrect Login Informatin. Try Again.");
+        
       }
     } catch (err) {
       throw err;
@@ -31,7 +31,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
   };
 
   async componentDidMount() {
-    if (User || User.role === "admin") {
+    if (User.userid !== null || User.role === "admin") {
       this.props.history.push("/admin");
     }
   }
@@ -71,7 +71,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
               variant="info"
               type="submit"
               className="d-block w-25 mx-auto"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => this.login}
+              onClick={this.login}
             >
               Log In
             </Button>
@@ -82,7 +82,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
   }
 }
 
-export interface ILoginProps extends RouteComponentProps {}
+export interface ILoginProps extends React.ComponentPropsWithRef<any> {}
 
 export interface ILoginState {
   email: string;
