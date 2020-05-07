@@ -1,5 +1,11 @@
 import fetch from "isomorphic-fetch";
 
+export let AccessToken: string = localStorage.getItem(`token`) || null;
+export let User: any = {
+  userid: localStorage.getItem(`userid`) || null,
+  role: localStorage.getItem(`role`) || null,
+};
+
 export const apiService = async (
   url: string,
   method: string = "GET",
@@ -8,6 +14,10 @@ export const apiService = async (
   let headers = {
     "Content-type": "application/json",
   };
+
+  if (AccessToken) {
+    headers["Authorization"] = `Bearer ${AccessToken}`;
+  }
 
   try {
     let res = await fetch(url, {
@@ -23,4 +33,16 @@ export const apiService = async (
   } catch (err) {
     throw err;
   }
+};
+
+export const setToken = (
+  token: string,
+  user: {} = { userid: undefined, role: "guest" }
+) => {
+  AccessToken = token;
+  User = user;
+
+  localStorage.setItem(`token`, AccessToken);
+  localStorage.setItem(`userid`, User.userid);
+  localStorage.setItem(`role`, User.role);
 };

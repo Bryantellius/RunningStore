@@ -5,6 +5,8 @@ import Shop from "./views/Shop";
 import Contact from "./views/Contact";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import AdminOptions from "./admin/AdminOptions";
+import Login from "./admin/Login";
 
 class App extends React.Component<IAppProps> {
   render() {
@@ -21,6 +23,12 @@ class App extends React.Component<IAppProps> {
             </Route>
             <Route path="/contact">
               <Contact />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/admin">
+              <AdminOptions />
             </Route>
           </Switch>
           <Footer />

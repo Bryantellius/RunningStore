@@ -4,14 +4,14 @@ import { NavLink } from "react-router-dom";
 class Footer extends React.Component<IFooterProps> {
   render() {
     return (
-      <main className="row p-3 bg-dark d-flex justify-content-center align-items-center">
+      <main id="footerMain" className="row p-3 bg-dark d-flex justify-content-center align-items-center">
         <ul className="nav">
           <li className="nav-item mx-2">
             <NavLink
               className="text-light nav-link"
               activeClassName="border-bottom border-light"
               exact
-              to="/"
+              to="/admin"
             >
               Admin
             </NavLink>
