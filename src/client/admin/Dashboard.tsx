@@ -1,39 +1,43 @@
 import * as React from "react";
 import Card from "react-bootstrap/Card";
+import { apiService } from "../utils/apiService";
+import { IShoe } from "../utils/types";
 
 class Dashboard extends React.Component<IDashboardProps, IDashboardState> {
   constructor(props: IDashboardProps) {
     super(props);
     this.state = {
-      name: null,
+      details: {
+        total: 0,
+        shoes: [],
+      },
     };
   }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    try {
+      let details = await apiService("/api/shoes/by_brand/Bradley");
+      this.setState({ details });
+    } catch (err) {
+      throw err;
+    }
+  }
 
   render() {
     return (
       <>
         <h1 className="text-dark text-center">Dashboard</h1>
         <Card>
-            <Card.Body>
-                <Card.Header>
-                    Total Inventory
-                </Card.Header>
-                <Card.Text>
-                    25
-                </Card.Text>
-            </Card.Body>
+          <Card.Body>
+            <Card.Header>Total Inventory</Card.Header>
+            <Card.Text>25</Card.Text>
+          </Card.Body>
         </Card>
         <Card>
-            <Card.Body>
-                <Card.Header>
-                    Bradley Inventory
-                </Card.Header>
-                <Card.Text>
-                    5
-                </Card.Text>
-            </Card.Body>
+          <Card.Body>
+            <Card.Header>Bradley Inventory</Card.Header>
+            <Card.Text>{this.state.details.total}</Card.Text>
+          </Card.Body>
         </Card>
       </>
     );
@@ -43,7 +47,10 @@ class Dashboard extends React.Component<IDashboardProps, IDashboardState> {
 export interface IDashboardProps {}
 
 export interface IDashboardState {
-  name: string;
+  details: {
+    total: number;
+    shoes: IShoe[];
+  };
 }
 
 export default Dashboard;

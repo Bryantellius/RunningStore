@@ -15,7 +15,7 @@ router.get("/:id?", async (req, res, next) => {
     }
   } else {
     try {
-      let shoes = await db.shoes.getAll();
+      let shoes = await db.shoes.getAllDistinct();
       res.json(shoes);
     } catch (err) {
       console.log(err);
@@ -52,6 +52,28 @@ router.delete("/:id", async (req, res, next) => {
   try {
     let { affectedRows }: any = await db.shoes.destroy(id);
     res.json({ affectedRows, msg: "Shoe Deleted :(" });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+router.get("/by_model/:id", async (req, res, next) => {
+  let model_name = req.params.id;
+  try {
+    let shoes = await db.shoes.spAllOneModel(model_name);
+    res.json({ total: shoes[0].length, shoes });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+router.get("/by_brand/:id", async (req, res, next) => {
+  let brand_name = req.params.id;
+  try {
+    let shoes = await db.shoes.spAllOneBrand(brand_name);
+    res.json({ total: shoes[0].length, shoes });
   } catch (err) {
     console.log(err);
     next(err);
