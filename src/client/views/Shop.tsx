@@ -1,61 +1,55 @@
 import * as React from "react";
-import { CardColumns, Card, InputGroup, FormControl } from "react-bootstrap";
 import { IShoe } from "../utils/types";
 import { apiService } from "../utils/apiService";
 
-class Shop extends React.Component<IShopProps, IShopState> {
-  constructor(props: IShopProps) {
-    super(props);
-    this.state = {
-      shoes: [],
-    };
-  }
+export const Shop: React.FC<IShopProps> = () => {
+  const [shoes, setShoes] = React.useState<IShoe[]>([]);
 
-  async componentDidMount() {
-    let shoes = await apiService(`/api/shoes`);
-    this.setState({ shoes });
-  }
+  React.useEffect(() => {
+    (async () => {
+      let shoes = await apiService(`/api/shoes`);
+      setShoes(shoes);
+    })();
+  });
 
-  render() {
-    return (
-      <main className="row my-5">
-        <div className="col-sm-4">
-          <label>Filter Results</label>
-          <InputGroup>
-            <FormControl aria-label="Filter Shoes" placeholder="Search..." />
-          </InputGroup>
+  return (
+    <main className="row my-5">
+      <div className="col-sm-4">
+        <label>Filter Results</label>
+        <div>
+          <input
+            className="form-control"
+            aria-label="Filter Shoes"
+            placeholder="Search..."
+          />
         </div>
-        <div className="col-sm-8">
-          <CardColumns>
-            {this.state.shoes.map((shoe: IShoe) => {
-              return (
-                <Card key={`${shoe.id}-${shoe.model_name}`}>
-                  <Card.Img variant="top"></Card.Img>
-                  <Card.Body>
-                    <Card.Text className="d-flex flex-column justify-content-start align-items-start p-2">
-                      <span>
-                        <u>{shoe.gender}</u>
-                      </span>
-                      <span>{`${shoe.brand_name} ${shoe.model_name}`}</span>
-                      <span>
-                        <em>${shoe.price}</em>
-                      </span>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              );
-            })}
-          </CardColumns>
+      </div>
+      <div className="col-sm-8">
+        <div className="card-deck">
+          {shoes.map((shoe: IShoe) => {
+            return (
+              <div className="card" key={`${shoe.id}-${shoe.model_name}`}>
+                <div className="card-img-top">Img</div>
+                <div className="card-body">
+                  <div className="card-text d-flex flex-column justify-content-start align-items-start p-2">
+                    <span>
+                      <u>{shoe.gender}</u>
+                    </span>
+                    <span>{`${shoe.brand_name} ${shoe.model_name}`}</span>
+                    <span>
+                      <em>${shoe.price}</em>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </main>
-    );
-  }
-}
+      </div>
+    </main>
+  );
+};
 
 export interface IShopProps {}
-
-export interface IShopState {
-  shoes: IShoe[];
-}
 
 export default Shop;

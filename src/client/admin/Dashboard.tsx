@@ -1,50 +1,44 @@
 import * as React from "react";
-import Card from "react-bootstrap/Card";
 import { apiService } from "../utils/apiService";
 import { IShoe } from "../utils/types";
 
-class Dashboard extends React.Component<IDashboardProps, IDashboardState> {
-  constructor(props: IDashboardProps) {
-    super(props);
-    this.state = {
-      details: {
-        total: 0,
-        shoes: [],
-      },
-    };
-  }
+export const Dashboard: React.FC<IDashboardProps> = () => {
+  const [details, setDetails] = React.useState<{
+    total: number;
+    shoes: IShoe[];
+  }>(null);
 
-  async componentDidMount() {
-    try {
-      let details = await apiService("/api/shoes/by_brand/Bradley");
-      this.setState({ details });
-    } catch (err) {
-      throw err;
-    }
-  }
+  React.useEffect(() => {
+    (async () => {
+      try {
+        let details = await apiService(`/api/shoes/by_brand/Bradley`);
+        setDetails(details);
+      } catch (err) {
+        throw err;
+      }
+    })();
+  });
 
-  render() {
-    return (
-      <>
-        <h1 className="text-dark text-center">Dashboard</h1>
-        <Card>
-          <Card.Body>
-            <Card.Header>Total Inventory</Card.Header>
-            <Card.Text>25</Card.Text>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Body>
-            <Card.Header>Bradley Inventory</Card.Header>
-            <Card.Text>{this.state.details.total}</Card.Text>
-          </Card.Body>
-        </Card>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <h1 className="text-dark text-center">Dashboard</h1>
+      <div className="card">
+        <div className="card-body">
+          <div className="card-title">Total Inventory</div>
+          <div className="card-text">25</div>
+        </div>
+      </div>
+      <div className="card">
+        <div className="card-body">
+          <div className="card-title">Bradley Inventory</div>
+          <div className="card-text">{details.total}</div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export interface IDashboardProps extends React.ComponentPropsWithRef<any> {}
+export interface IDashboardProps {}
 
 export interface IDashboardState {
   details: {

@@ -11,7 +11,7 @@ export const apiService = async (
   method: string = "GET",
   body?: {}
 ) => {
-  let headers = {
+  let headers: any = {
     "Content-type": "application/json",
   };
 

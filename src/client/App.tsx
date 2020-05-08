@@ -8,25 +8,23 @@ import Footer from "./components/Footer";
 import AdminOptions from "./admin/AdminOptions";
 import Login from "./admin/Login";
 
-class App extends React.Component<IAppProps> {
-  render() {
-    return (
-      <main id="appMain" className="container-fluid">
-        <BrowserRouter>
-          <NavBar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/shop" component={Shop} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/login" component={Login} />
-            <Route path="/admin" component={AdminOptions} />
-          </Switch>
-          <Footer />
-        </BrowserRouter>
-      </main>
-    );
-  }
-}
+export const App: React.FC<IAppProps> = () => {
+  return (
+    <main id="appMain" className="container-fluid">
+      <BrowserRouter>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/shop" component={Shop} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/login" component={Login} />
+          <Route path="/admin" component={AdminOptions} />
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </main>
+  );
+};
 
 export interface IAppProps {}
 
