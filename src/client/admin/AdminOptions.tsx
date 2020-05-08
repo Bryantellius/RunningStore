@@ -29,10 +29,10 @@ class AdminOptions extends React.Component<
         </h1>
         <div className="row">
           <div className="col-sm-4 text-center">
-            <Inventory />
+            <Inventory props={this.props}/>
           </div>
           <div className="col-sm-4 text-center">
-            <Dashboard />
+            <Dashboard props={this.props}/>
           </div>
           <div className="col-sm-4">
             <Location />

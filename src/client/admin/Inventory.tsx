@@ -1,9 +1,6 @@
 import * as React from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import InputGroup from "react-bootstrap/InputGroup";
 import { IShoe } from "../utils/types";
 import { apiService } from "../utils/apiService";
 
@@ -12,8 +9,19 @@ class Inventory extends React.Component<IInventoryProps, IInventoryState> {
     super(props);
     this.state = {
       shoes: [],
+      quantity: 0,
     };
+    this.goToModel = this.goToModel.bind(this);
   }
+
+  goToModel = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    let model = document.getElementById(
+      "adminModelSelect"
+    ) as HTMLSelectElement;
+    // console.log(this.props.props.history);
+    this.props.props.history.push(`/admin/${model.value}`);
+  };
 
   async componentDidMount() {
     try {
@@ -27,62 +35,39 @@ class Inventory extends React.Component<IInventoryProps, IInventoryState> {
   render() {
     return (
       <>
-        <ButtonGroup aria-label="Inventory Options">
-          <Button variant="success">Insert</Button>
-          <Button variant="warning">Update</Button>
-          <Button variant="danger">Delete</Button>
-        </ButtonGroup>
         <Card className="p-3 my-2">
           {/* Select options to filter shoe model */}
-          <select>
+          <select id="adminModelSelect" className="custom-select">
             {this.state.shoes.map((shoe: IShoe) => {
               return (
-                <option key={`${shoe.id}-${shoe.model_name}`}>
+                <option
+                  key={`${shoe.id}-${shoe.model_name}`}
+                  value={shoe.model_name}
+                >
                   {shoe.brand_name} {shoe.model_name}
                 </option>
               );
             })}
           </select>
           {/* Checkboxes to filter shoe gender */}
-          <InputGroup className="d-flex justify-content-around align-items-center p-3 my-2">
-            <label>Male</label>
-            <InputGroup.Checkbox aria-label="Checkbox for male gender" />
-            <label>Female</label>
-            <InputGroup.Checkbox aria-label="Checkbox for female gender" />
-          </InputGroup>
-        </Card>
-
-        <Card className="p-3 my-2">
-          <h6>Model Quantity</h6>
-          <InputGroup className="w-50 mx-auto">
-            <InputGroup.Prepend>
-              <InputGroup.Text>-</InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl aria-label="Input for quantity" placeholder="Custom" />
-            <InputGroup.Append>
-              <InputGroup.Text>+</InputGroup.Text>
-            </InputGroup.Append>
-          </InputGroup>
-          <h6>Price</h6>
-          <InputGroup className="w-50 mx-auto">
-            <InputGroup.Prepend>
-              <InputGroup.Text>$</InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl aria-label="Input for price" />
-            <InputGroup.Append>
-              <InputGroup.Text>.00</InputGroup.Text>
-            </InputGroup.Append>
-          </InputGroup>
+          <Button
+            variant="info"
+            className="my-3 d-block"
+            onClick={this.goToModel}
+          >
+            Check Inventory
+          </Button>
         </Card>
       </>
     );
   }
 }
 
-export interface IInventoryProps {}
+export interface IInventoryProps extends React.ComponentPropsWithRef<any> {}
 
 export interface IInventoryState {
   shoes: IShoe[];
+  quantity: number;
 }
 
 export default Inventory;

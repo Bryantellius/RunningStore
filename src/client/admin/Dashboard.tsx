@@ -44,7 +44,7 @@ class Dashboard extends React.Component<IDashboardProps, IDashboardState> {
   }
 }
 
-export interface IDashboardProps {}
+export interface IDashboardProps extends React.ComponentPropsWithRef<any> {}
 
 export interface IDashboardState {
   details: {
