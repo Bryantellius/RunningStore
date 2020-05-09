@@ -3,21 +3,19 @@ import { IShoe } from "../../utils/types";
 
 export const getOne = async (id: number) => {
   return Query(
-    `SELECT s.id, b.brand_name, s.model_name, s.size, s.price, s.gender FROM shoes s JOIN brands b ON b.id = s.brand_id WHERE s.id = ?`,
+    `SELECT s.id, s.model_id, b.brand_name, b.model_name, s.size, b.price, s.gender FROM shoes s JOIN brands b ON b.id = s.brand_id WHERE s.id = ?`,
     [id]
   );
 };
 
 export const getAll = async () => {
   return Query(
-    `SELECT s.id, b.brand_name, s.model_name, s.size, s.price, s.gender FROM shoes s JOIN brands b ON b.id = s.brand_id`
+    `SELECT s.id, s.model_id, b.brand_name, b.model_name, s.size, b.price, s.gender FROM shoes s JOIN brands b ON b.id = s.brand_id`
   );
 };
 
-export const getAllDistinct = async () => {
-  return Query(
-    `SELECT DISTINCT b.brand_name, s.model_name, s.size, s.price, s.gender FROM shoes s JOIN brands b ON b.id = s.brand_id`
-  );
+export const getWhatWeCarry = async () => {
+  return Query(`SELECT DISTINCT * from brands`);
 };
 
 export const insert = async (body: IShoe) => {
@@ -34,9 +32,9 @@ export const destroy = async (id: number) => {
 
 // Stored Procedures
 
-// Returns an array of all shoe objects with the same model_name
-export const spAllOneModel = async (model_name: string) => {
-  return Query(`CALL spAllOneModel(?)`, [model_name]);
+// Returns an array of all shoe objects with the same model_id
+export const spAllOneModel = async (model_id: number) => {
+  return Query(`CALL spAllOneModel(?)`, [model_id]);
 };
 
 // Returns an array of all shoe objects with the same brand_name
@@ -47,7 +45,7 @@ export const spAllOneBrand = async (brand_name: string) => {
 export default {
   getOne,
   getAll,
-  getAllDistinct,
+  getWhatWeCarry,
   insert,
   update,
   destroy,

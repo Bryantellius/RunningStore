@@ -17,7 +17,7 @@ export const Dashboard: React.FC<IDashboardProps> = () => {
         throw err;
       }
     })();
-  });
+  }, []);
 
   return (
     <>
@@ -31,7 +31,7 @@ export const Dashboard: React.FC<IDashboardProps> = () => {
       <div className="card">
         <div className="card-body">
           <div className="card-title">Bradley Inventory</div>
-          <div className="card-text">{details.total}</div>
+          <div className="card-text">{details?.total}</div>
         </div>
       </div>
     </>

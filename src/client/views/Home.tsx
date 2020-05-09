@@ -1,5 +1,4 @@
 import * as React from "react";
-import { IShoe } from "../utils/types";
 
 export const Home: React.FC<IHomeProps> = () => {
   return (

@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import AdminOptions from "./admin/AdminOptions";
 import Login from "./admin/Login";
+import SingleModel from "./views/SingleModel";
 
 export const App: React.FC<IAppProps> = () => {
   return (
@@ -18,7 +19,8 @@ export const App: React.FC<IAppProps> = () => {
           <Route path="/shop" component={Shop} />
           <Route path="/contact" component={Contact} />
           <Route path="/login" component={Login} />
-          <Route path="/admin" component={AdminOptions} />
+          <Route exact path="/admin" component={AdminOptions} />
+          <Route path="/admin/model/:id" component={SingleModel} />
         </Switch>
         <Footer />
       </BrowserRouter>

@@ -33,7 +33,7 @@ export const Login: React.FC<ILoginProps> = () => {
         history.push("/admin");
       }
     })();
-  });
+  }, []);
 
   return (
     <main className="container my-5">

@@ -10,7 +10,7 @@ export const Shop: React.FC<IShopProps> = () => {
       let shoes = await apiService(`/api/shoes`);
       setShoes(shoes);
     })();
-  });
+  }, []);
 
   return (
     <main className="row my-5">
