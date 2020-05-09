@@ -1,6 +1,5 @@
 import * as React from "react";
 import { User } from "../utils/apiService";
-import Inventory from "./Inventory";
 import Location from "./Location";
 import Dashboard from "./Dashboard";
 import { useHistory } from "react-router-dom";
@@ -21,7 +20,7 @@ export const AdminOptions: React.FC<IAdminOptionsProps> = () => {
       </h1>
       <div className="row">
         <div className="col-sm-4 text-center">
-          <Inventory />
+          <Location />
         </div>
         <div className="col-sm-8 text-center">
           <Dashboard />

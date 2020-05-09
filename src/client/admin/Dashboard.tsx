@@ -1,40 +1,23 @@
 import * as React from "react";
 import { apiService } from "../utils/apiService";
 import { IShoe } from "../utils/types";
+import * as moment from "moment";
 
 export const Dashboard: React.FC<IDashboardProps> = () => {
-  const [details, setDetails] = React.useState<{
-    total: number;
-    shoes: IShoe[];
-  }>(null);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        let details = await apiService(`/api/shoes/by_brand/Bradley`);
-        setDetails(details);
-      } catch (err) {
-        throw err;
-      }
-    })();
-  }, []);
-
   return (
-    <>
-      <h1 className="text-dark text-center">Dashboard</h1>
+    <div className="card-group my-2 shadow">
       <div className="card">
         <div className="card-body">
-          <div className="card-title">Total Inventory</div>
-          <div className="card-text">25</div>
+          <h3 className="card-title">Total Inventory</h3>
+          <h5 className="card-text text-6">25</h5>
         </div>
       </div>
       <div className="card">
-        <div className="card-body">
-          <div className="card-title">Bradley Inventory</div>
-          <div className="card-text">{details?.total}</div>
+        <div className="card-body d-flex justify-content-center align-items-center bg-light">
+          <h3 className="card-text">{moment().format("MMM DD YYYY")}</h3>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
